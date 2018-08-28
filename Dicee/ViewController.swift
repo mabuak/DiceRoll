@@ -15,13 +15,15 @@ class ViewController: UIViewController {
     
     let diceArray = ["dice1", "dice2", "dice3", "dice4", "dice5", "dice6"]
     
-    //Mark : Outlet
+    // Mark : Outlet
     @IBOutlet var diceImageView1: UIImageView!
     @IBOutlet var diceImageView2: UIImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        
+        updateDiceImage()
     }
 
     override func didReceiveMemoryWarning() {
@@ -29,8 +31,13 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
-    //Mark : Action Button
+    // Mark : Action Button
     @IBAction func rollButton(_ sender: UIButton) {
+        updateDiceImage()
+    }
+    
+    // Mark : Function
+    func updateDiceImage() {
         randomDiceIndex1 = Int(arc4random_uniform(6))
         randomDiceIndex2 = Int(arc4random_uniform(6))
         
@@ -38,6 +45,10 @@ class ViewController: UIViewController {
         diceImageView2.image = UIImage(named: diceArray[randomDiceIndex2])
     }
     
+    // Mark : Shake Motion
+    override func motionEnded(_ motion: UIEventSubtype, with event: UIEvent?) {
+        updateDiceImage()
+    }
     
 }
 
